@@ -18,6 +18,9 @@ class Photograph extends User
     #[ORM\OneToMany(mappedBy: 'photograph', targetEntity: Photo::class)]
     private Collection $photos;
 
+    #[ORM\Column(length: 255)]
+    private ?string $profil_picture = null;
+
     public function __construct()
     {
         $this->photos = new ArrayCollection();
@@ -54,6 +57,18 @@ class Photograph extends User
                 $photo->setPhotograph(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getProfilPicture(): ?string
+    {
+        return $this->profil_picture;
+    }
+
+    public function setProfilPicture(string $profil_picture): self
+    {
+        $this->profil_picture = $profil_picture;
 
         return $this;
     }

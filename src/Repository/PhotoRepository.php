@@ -23,19 +23,23 @@ class PhotoRepository extends ServiceEntityRepository
 
     public function save(Photo $entity, bool $flush = false): void
     {
-        $this->getEntityManager()->persist($entity);
+        $this->getEntityManager()
+             ->persist($entity);
 
         if ($flush) {
-            $this->getEntityManager()->flush();
+            $this->getEntityManager()
+                 ->flush();
         }
     }
 
     public function remove(Photo $entity, bool $flush = false): void
     {
-        $this->getEntityManager()->remove($entity);
+        $this->getEntityManager()
+             ->remove($entity);
 
         if ($flush) {
-            $this->getEntityManager()->flush();
+            $this->getEntityManager()
+                 ->flush();
         }
     }
 
@@ -63,4 +67,16 @@ class PhotoRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+    public function bestPhotographByPhotoCount()
+    {
+        return $this->createQueryBuilder('photo')
+                    ->join('photo.photograph', 'ph')
+                    ->select('ph.firstName, ph.lastName, ph.profil_picture, count(photo.id) as HIDDEN nb')
+                    ->orderBy('nb', 'DESC')
+                    ->groupBy("ph.id")
+                    ->setMaxResults(4)
+                    ->getQuery()
+                    ->getResult();
+    }
 }
