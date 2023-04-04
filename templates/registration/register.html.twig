@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+    <div class="d-flex justify-content-center">
+        <div class="bg-dark text-white w-50 p-4 mt-5">
+            <h1 class="text-center">{{ chosenClass }} - Inscription</h1>
+
+            {{ form_start(registrationForm) }}
+            {{ form_row(registrationForm.firstName) }}
+            {{ form_row(registrationForm.lastName) }}
+            {{ form_row(registrationForm.email) }}
+            {{ form_row(registrationForm.plainPassword) }}
+            {{ form_row(registrationForm.agreeTerms) }}
+            <div class="text-center">
+                {{ form_row(registrationForm.Valider) }}
+            </div>
+            {{ form_end(registrationForm) }}
+        </div>
+    </div>
+
+{% endblock %}
