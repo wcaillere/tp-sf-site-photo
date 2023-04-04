@@ -2,6 +2,8 @@
 
 namespace App\DataFixtures;
 
+use App\Factory\PhotoFactory;
+use App\Factory\PhotographFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -9,9 +11,8 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        // $product = new Product();
-        // $manager->persist($product);
+        PhotographFactory::createMany(3);
 
-        $manager->flush();
+        PhotoFactory::createMany(10);
     }
 }
